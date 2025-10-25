@@ -2,10 +2,10 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
 import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 import "./globals.css";
 
-const inter=Inter({subsets:["latin"]});
-
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Career Advisor",
@@ -14,30 +14,39 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
-    <html lang="en">
-      <body
-        className={`${inter.className} `}
-      >
-         <ThemeProvider
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
+      <html lang="en">
+        <body className={`${inter.className}`}>
+          <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-            {/*header*/}
-            <Header/>
-            <main className="min-h-screen">
-               {children}
+            {/* Grid Background */}
+            <div className="grid-background" />
+
+            {/* Fixed Header */}
+            <Header />
+
+            {/* Main content */}
+            <main className="relative min-h-screen pt-20 overflow-y-auto">
+              {children}
             </main>
-           <footer className="bg-muted/50 py-12">
-            <div className="container mx-auto px-4 text-center text-gray-200">
-              <p>Made By Pratham Grover</p>
-            </div>
-           </footer>
+
+            {/* Footer */}
+            <footer className="bg-muted/50 py-12 relative z-10">
+              <div className="container mx-auto px-4 text-center text-gray-200">
+                <p>Made By Pratham Grover</p>
+              </div>
+            </footer>
           </ThemeProvider>
-      </body>
-    </html>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }

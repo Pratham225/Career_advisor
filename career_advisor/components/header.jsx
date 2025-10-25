@@ -76,7 +76,15 @@ const Header = () => {
             </SignInButton>
           </SignedOut>
           <SignedIn>
-            <UserButton />
+            <UserButton 
+            appearance={{
+                elements:{
+                    avtarBox:"w-10 h-10",
+                    userButtonPopoverCard:"shadow-xl",
+                    userPreviewMainIndentifier:"font-semibold",
+                },
+            }}
+            />
           </SignedIn>
         </div>
       </div>
